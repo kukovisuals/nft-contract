@@ -1,89 +1,162 @@
+* {
+  box-sizing: border-box;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+}
+
 .buttonClass{
-  width:  25%;
-  /*border: 1px solid;*/
-  height: 100px;
+  width: 100%;
   display: flex;
+  flex-direction: column;
   position:absolute;
-  bottom: 0;
-  transform: translate(30px,-30px);
+  /*bottom: 0;*/
+  /*transform: translate(10px,10px);*/
 }
-
-button {
-  background-color: rgb(158, 202, 225);
-  border: none;
-  color: black;
-  padding: 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 10px;
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  /*border:  1px solid;*/
-  cursor: pointer;
-}
-
-button:hover{
-  background-color:rgb(8, 48, 107);
-  color:  white;
-}
-
-.button-rev{
-  width:  100%;
-  /*border: 1px solid;*/
-  height: 100px;
-  display: flex;
-  flex-direction: row-reverse;
-  position:absolute;
-  padding: 5px;
-  bottom: 0;
-  transform: translate(-30px,-30px);
-}
-
-.tooltip-area {   
-  position: absolute;
-    font: 15px sans-serif;    
-    background: rgb(158, 202, 225); 
-    border: 0px;    
-    border-radius: 15px;     
-    pointer-events: none;    
-    height: 130px;
-    width: 340px;
-    padding: 15px;
-    transform: translate(83px, -1060px); 
-}
-.tooltip-area2 {   
-  position: absolute;
-    font: 15px sans-serif;    
-    background: rgb(158, 202, 225); 
-    border: 0px;    
-    border-radius: 15px;     
-    pointer-events: none;    
-    height: 20px;
-    width: 340px;
-    padding: 15px;
-    transform: translate(83px, -1000px); 
-}
-.tooltip-area3 {   
-  position: absolute;
-    font: 15px sans-serif;    
-    background: rgb(158, 202, 225); 
-    border: 0px;    
-    border-radius: 15px;     
-    pointer-events: none;    
-    height: 20px;
-    width: 340px;
-    padding: 15px;
-    transform: translate(83px, -960px); 
-}
-.tooltip-area__text2{    
-  color: black;
-}
-.tooltip-area__text3{    
-  color: black;
-}
-.tooltip-area__text{
+.buttton-mint {
+    background-color: rgb(158, 202, 225);
+    border: none;
     color: black;
-}
+    padding: 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 auto;
+    height: 30px;
+    width: 80%;
+    border-radius: 0%;
+    /* border: 1px solid; */
+    cursor: pointer;
+  }
+
+  .buttton-one{
+    background-color: rgb(158, 202, 225);
+    border: none;
+    color: black;
+    padding: 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 auto;
+    width: 80%;
+    height: 30px;
+    /* border: 1px solid; */
+    cursor: pointer;  
+  }
+
+  button:hover{
+    background-color:rgb(8, 48, 107);
+    color:  white;
+  }
+
+  .button-rev{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+  }
+
+  .tooltip-area {   
+    position: absolute;
+      font: 15px sans-serif;    
+      background: rgb(158, 202, 225); 
+      border: 0px;    
+      border-radius: 15px;     
+      pointer-events: none;    
+      height: 130px;
+      width: 340px;
+      padding: 15px;
+      transform: translate(83px, -1060px); 
+  }
+  .tooltip-area2 {   
+    position: absolute;
+      font: 15px sans-serif;    
+      background: rgb(158, 202, 225); 
+      border: 0px;    
+      border-radius: 15px;     
+      pointer-events: none;    
+      height: 20px;
+      width: 340px;
+      padding: 15px;
+      transform: translate(83px, -1000px); 
+  }
+  .tooltip-area3 {   
+    position: absolute;
+      font: 15px sans-serif;    
+      background: rgb(158, 202, 225); 
+      border: 0px;    
+      border-radius: 15px;     
+      pointer-events: none;    
+      height: 20px;
+      width: 340px;
+      padding: 15px;
+      transform: translate(83px, -960px); 
+  }
+  .tooltip-area__text2{    
+    color: black;
+  }
+  .tooltip-area__text3{    
+    color: black;
+  }
+  .tooltip-area__text{
+      color: black;
+  }
+@media only screen and (min-width:  768px){
+  .buttonClass{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    position:absolute;
+    bottom: 0;
+  }
+
+  .buttton-mint  {
+   height: 50px;
+   margin: 1px;
+  }
+
+  button:hover{
+    background-color:rgb(8, 48, 107);
+    color:  white;
+  }
+  .buttton-one {
+    margin: 1px;
+    height: 50px;
+    border-radius: 3%;
+  }
+  .button-rev{
+    width: 36%;
+    flex-direction: row;
+    right: 0;
+     height: 50px;
+     margin: 1px;
+  }
+
+  .tooltip-area {   
+    position: absolute;
+      font: 15px sans-serif;    
+      background: rgb(158, 202, 225); 
+      border: 0px;    
+      border-radius: 15px;     
+      pointer-events: none;    
+      height: 150px;
+      width: 390px;
+      padding: 15px;
+      transform: translate(83px, -1060px); 
+  }
+  
+  .tooltip-area__text2{    
+    color: black;
+  }
+  .tooltip-area__text3{    
+    color: black;
+  }
+  .tooltip-area__text{
+      color: black;
+  }
+} 

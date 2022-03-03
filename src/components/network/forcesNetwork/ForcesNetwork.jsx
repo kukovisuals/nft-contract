@@ -1,4 +1,4 @@
-import React,{useState, useRef, useEffect} from 'react';
+import React,{useState, useRef, useEffect, useMemo} from 'react';
 import colorbrewer from 'colorbrewer'
 import * as d3 from 'd3';
 import './ForcesNetwork.css'
@@ -11,7 +11,14 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
   const nodeHash = {}
   let maxTxn, colorScale, yScale
 
-  const handleChange = ( (e) => {
+  const margin = {
+    left: 20, 
+    top: 100,
+    right: 20, 
+    bottom: 50,
+  }
+  const r = 25
+  const handleChange =  (e) => {
     switch(e.target.innerText){
       case "Owner Mint":          
         const a = comingData.filter( d => d.Method === "Owner Mint")
@@ -19,7 +26,7 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
         maxTxn = d3.max(a, d=> d.TxnFee)
          
         colorScale = d3.scaleQuantize().domain([0,maxTxn]).range(colorbrewer.BuPu[4])
-        yScale = d3.scaleLinear().domain([0, maxTxn]).range([0,25])
+        yScale = d3.scaleLinear().domain([0, maxTxn]).range([0,r])
         
         setMainNode([
           ...a.map( (edge,i) =>  nodeHash[edge.id] = {id: edge.id, dTime: edge.DateTime,  tfee: edge.TxnFee, transaction_fee: edge.TxnFee, radius: yScale(edge.TxnFee), color: colorScale(edge.TxnFee)})
@@ -30,7 +37,7 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
 
         maxTxn = d3.max(b, d=> d.TxnFee)
         colorScale = d3.scaleQuantize().domain([0,maxTxn]).range(colorbrewer.Set1[3])
-        yScale = d3.scaleLinear().domain([0, maxTxn]).range([0,25])
+        yScale = d3.scaleLinear().domain([0, maxTxn]).range([0,r])
 
         setMainNode([
           ...b.map( (edge,i) =>  nodeHash[edge.id] = {id: edge.id, dTime: edge.DateTime,  tfee: edge.TxnFee, transaction_fee: edge.TxnFee, radius: yScale(edge.TxnFee), color: colorScale(edge.TxnFee)})
@@ -41,7 +48,7 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
 
         maxTxn = d3.max(c, d=> d.TxnFee)
         colorScale = d3.scaleQuantize().domain([0,maxTxn]).range(colorbrewer.Blues[9])
-        yScale = d3.scaleLinear().domain([0, maxTxn]).range([0,25])
+        yScale = d3.scaleLinear().domain([0, maxTxn]).range([0,r])
 
         setMainNode([
           ...c.map( (edge,i) =>  nodeHash[edge.id] = {id: edge.id, dTime: edge.DateTime,  tfee: edge.TxnFee, transaction_fee: edge.TxnFee, radius: yScale(edge.TxnFee), color: colorScale(edge.TxnFee)})
@@ -52,7 +59,7 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
 
         maxTxn = d3.max(d, d=> d.TxnFee)
         colorScale = d3.scaleQuantize().domain([0,maxTxn]).range(colorbrewer.Blues[9])
-        yScale = d3.scaleLinear().domain([0, maxTxn]).range([0,25])
+        yScale = d3.scaleLinear().domain([0, maxTxn]).range([0,r])
 
         setMainNode([
           ...d.map( (edge,i) =>  nodeHash[edge.id] = {id: edge.id,  dTime: edge.DateTime,  tfee: edge.TxnFee, transaction_fee: edge.TxnFee, radius: yScale(edge.TxnFee), color: colorScale(edge.TxnFee)})
@@ -63,7 +70,7 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
 
         maxTxn = d3.max(f, d=> d.TxnFee)
         colorScale = d3.scaleQuantize().domain([0,maxTxn]).range(colorbrewer.Reds[3])
-        yScale = d3.scaleLinear().domain([0, maxTxn]).range([0,25])
+        yScale = d3.scaleLinear().domain([0, maxTxn]).range([0,r])
 
         setMainNode([
           ...f.map( (edge,i) =>  nodeHash[edge.id] = {id: edge.id, dTime: edge.DateTime,  tfee: edge.TxnFee, transaction_fee: edge.TxnFee, radius: yScale(edge.TxnFee), color: colorScale(edge.TxnFee)})
@@ -73,13 +80,13 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
         default:
         throw new Error()
     }
-  });
+  };
   useEffect(() => {
 
     const svgEl = d3.select( currentRef.current)
     svgEl.selectAll("*").remove(); // Clear svg content before adding new elements 
     const svg = svgEl
-      .append("g")
+      .append("g").attr('transform', `translate(0,-110)`)
     const xScale =d3.scaleBand().domain(["Owner Mint","Set Provenance Hash","Set Approval For All","Mint Listed","Set Active" ]).range([0,dimensionsW-150])
 
     // Define the div for the tooltip
@@ -97,6 +104,7 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
         .attr('cx', (d) => d.x )
         .attr('cy', (d) => d.y )
         .on("click" , (e, d) => {
+
           navigator.clipboard.writeText(d.id);
           alert("Copied wallet address: " + d.id);
         } ) 
@@ -115,10 +123,12 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
             div.style("opacity", 1); 
             })          
         .on("mouseleave", (d) => {    
-            // div.style("opacity", 0);  
+            div.style("opacity", 0);  
+            div3.style("opacity", 0); 
+            div2.style("opacity", 0);  
         });
 
-    }
+    } 
     d3.forceSimulation(mainNode)
       .force('charge', d3.forceManyBody().strength(0))
       // .force('x', d3.forceCenter().x(dimensionsW/2).y(0) )
@@ -126,7 +136,9 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
       .force('collision', d3.forceCollide().radius(d  => d.radius )) 
       .on('tick', ticked);
 
-     return () => window.removeEventListener('click', handleChange);
+
+      // console.log(w )
+     return () => {}
   },[mainNode])  
 
   return (
@@ -136,9 +148,9 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
         <button className="buttton-one" onClick={handleChange}> Set Approval For All </button>
       </div>
       <div className="buttonClass">
-        <button onClick={handleChange}> Owner Mint </button>
-        <button onClick={handleChange}>Mint Listed </button>
-        <button onClick={handleChange}> Set Active </button>
+        <button className="buttton-mint" onClick={handleChange}> Owner Mint </button>
+        <button className="buttton-mint" onClick={handleChange}>Mint Listed </button>
+        <button className="buttton-mint" onClick={handleChange}> Set Active </button>
       </div>
       <svg ref={currentRef} width={dimensionsW} height={dimensionsH} />
       <g className="tooltip-area">

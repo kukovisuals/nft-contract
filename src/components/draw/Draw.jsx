@@ -10,7 +10,17 @@ function Draw() {
   const [loading, setLoading] = useState(true)
 
   const [width, height] = useWindowSize()
-
+// 
+//           links.set('id',d.From)
+//           links.set('to', d.To) 
+//           links.set('BlockNumber', +d['Blockno'])   
+//           links.set('TxnFee', parseFloat(d['TxnFee(USD)']) )
+//           links.set('Method', d['Method'] )
+//           links.set('Unix Time' ,  new Date(+d['UnixTimestamp'] * 1000) )
+//           links.set('ContractAddress' , d['ContractAddress'] )
+//           links.set('Status' , d['Status'] )
+//           links.set('Value_IN(ETH)',  parseFloat(['Value_IN(ETH)']) )
+//           links.set('Value_OUT(ETH)',parseFloat( d['Value_OUT(ETH)']) )
 
   useEffect(() => {
     d3.csv('invisibleFriends.csv').then( (data,error) =>{
@@ -29,31 +39,34 @@ function Draw() {
       setLoading(false)
     return () => {}
     }).catch(console.error)
-  },[mainNode])  
- 
+  },[])  
+//  
 //   useEffect(() => {
-//     d3.csv('player1.csv').then( (data,error) =>{
+//     d3.csv('player2.csv').then( (data,error) =>{
 // 
-//       const nodes = data.map( (d,i) => {
-//         const node = new Map()
-//         
-//         let Method = ''
-//           node.set('id',d.From)
-//           node.set('to', d.To) 
-//           node.set('BlockNumber', +d['Blockno'])   
-//           node.set('TxnFee', parseFloat(d['TxnFee(USD)']) )
-//           node.set('Method', d['Method'] )
-//           node.set('Unix Time' ,  new Date(+d['UnixTimestamp'] * 1000) )
-//           node.set('ContractAddress' , d['ContractAddress'] )
-//           node.set('Status' , d['Status'] )
-//           node.set('Value_IN(ETH)',  parseFloat(['Value_IN(ETH)']) )
-//           node.set('Value_OUT(ETH)',parseFloat( d['Value_OUT(ETH)']) )
+//         const nodes = new Set()
+//         const newNodes = data.map( (d,i) => {
+//         const links = {}
+//         let name = ''
+//           links.id = d.From
+//           links.to =  d.To
+//           // links.set('BlockNumber', +d['Blockno'])   
+//           links.valueUSD = parseFloat( d['TxnFee(USD)'])
+//           links['Method']= d['Method'] 
+//           // links.set('Unix Time' ,  new Date(+d['UnixTimestamp'] * 1000) )
+//           // links.set('ContractAddress' , d['ContractAddress'] )
+//           // links.set('Status' , d['Status'] )
+//           links['Value_IN(ETH)'] = parseFloat( d['Value_IN(ETH)'] )
+//           links['targetETH'] = parseFloat( d['Value_OUT(ETH)'])
 //           
-//           Method =  d['Method']  
-//         // if(i < 100) return node
-//           return {node, Method}
+//           // if( !links.has(d['Method'] ) ){
+//           //   Method =  nodes.add( d['Method'] )  
+//           // }
+//           name = d['Method']
+//         // if(i < 100) return links
+//           return links
 //       })
-//       setMainNode(nodes)
+//       setMainNode(newNodes)
 //       setLoading(false)
 //     return () => {}
 //     }).catch(console.error)

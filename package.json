@@ -9,6 +9,7 @@
     "@types/colorbrewer": "^1.0.29",
     "colorbrewer": "^1.5.2",
     "d3": "^7.3.0",
+    "node-iex-cloud": "^2.1.1",
     "react": "^17.0.2",
     "react-csv-reader": "^3.4.0",
     "react-dom": "^17.0.2",

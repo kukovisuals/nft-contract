@@ -1,32 +1,31 @@
-import React,{useState, useRef, useEffect, useMemo} from 'react';
+import React,{useState, useRef, useEffect} from 'react';
 import colorbrewer from 'colorbrewer'
 import * as d3 from 'd3';
 import './ForcesNetwork.css'
 
 function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
   const currentRef = useRef()
-  const tulipRef = useRef()
   const [mainNode, setMainNode] = useState([])
 
   const nodeHash = {}
-  let maxTxn, colorScale, yScale
+  let maxTxn, colorScale, yScale, txMin,txMean,txMax
 
-  const margin = {
-    left: 20, 
-    top: 100,
-    right: 20, 
-    bottom: 50,
-  }
-  const r = 25
+  // const margin = {
+  //   left: 20, 
+  //   top: 100,
+  //   right: 20, 
+  //   bottom: 50,
+  // }
+  const r = 7
   const handleChange =  (e) => {
     switch(e.target.innerText){
       case "Owner Mint":          
         const a = comingData.filter( d => d.Method === "Owner Mint")
         
-        maxTxn = d3.max(a, d=> d.TxnFee)
+        maxTxn = d3.extent(a, d=> d.TxnFee)
          
-        colorScale = d3.scaleQuantize().domain([0,maxTxn]).range(colorbrewer.BuPu[4])
-        yScale = d3.scaleLinear().domain([0, maxTxn]).range([0,r])
+        colorScale = d3.scaleQuantize().domain(maxTxn).range(colorbrewer.BuPu[4])
+        yScale = d3.scaleLinear().domain(maxTxn).range([0,r])
         
         setMainNode([
           ...a.map( (edge,i) =>  nodeHash[edge.id] = {id: edge.id, dTime: edge.DateTime,  tfee: edge.TxnFee, transaction_fee: edge.TxnFee, radius: yScale(edge.TxnFee), color: colorScale(edge.TxnFee)})
@@ -35,9 +34,9 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
       case "Set Provenance Hash": 
         const b = comingData.filter( d => d.Method === "Set Provenance Hash")
 
-        maxTxn = d3.max(b, d=> d.TxnFee)
-        colorScale = d3.scaleQuantize().domain([0,maxTxn]).range(colorbrewer.Set1[3])
-        yScale = d3.scaleLinear().domain([0, maxTxn]).range([0,r])
+        maxTxn = d3.extent(b, d=> d.TxnFee)
+        colorScale = d3.scaleQuantize().domain(maxTxn).range(colorbrewer.Set1[3])
+        yScale = d3.scaleLinear().domain(maxTxn).range([0,r])
 
         setMainNode([
           ...b.map( (edge,i) =>  nodeHash[edge.id] = {id: edge.id, dTime: edge.DateTime,  tfee: edge.TxnFee, transaction_fee: edge.TxnFee, radius: yScale(edge.TxnFee), color: colorScale(edge.TxnFee)})
@@ -46,9 +45,13 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
       case "Set Approval For All": 
        const c = comingData.filter( d => d.Method === "Set Approval For All")
 
-        maxTxn = d3.max(c, d=> d.TxnFee)
-        colorScale = d3.scaleQuantize().domain([0,maxTxn]).range(colorbrewer.Blues[9])
-        yScale = d3.scaleLinear().domain([0, maxTxn]).range([0,r])
+        maxTxn = d3.extent(c, d=> d.TxnFee).reverse()
+
+        txMin = d3.min(c, d=> d.TxnFee)
+        txMean = d3.median(c, d=> d.TxnFee)
+        txMax = d3.max(c, d=> d.TxnFee)
+        colorScale = d3.scaleQuantize().domain([txMin, txMean, txMax]).range( colorbrewer.RdBu[4] )
+        yScale = d3.scaleLinear().domain(maxTxn).range([0,r])
 
         setMainNode([
           ...c.map( (edge,i) =>  nodeHash[edge.id] = {id: edge.id, dTime: edge.DateTime,  tfee: edge.TxnFee, transaction_fee: edge.TxnFee, radius: yScale(edge.TxnFee), color: colorScale(edge.TxnFee)})
@@ -57,9 +60,12 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
       case "Mint Listed":          
         const d = comingData.filter( d => d.Method === "Mint Listed")
 
-        maxTxn = d3.max(d, d=> d.TxnFee)
-        colorScale = d3.scaleQuantize().domain([0,maxTxn]).range(colorbrewer.Blues[9])
-        yScale = d3.scaleLinear().domain([0, maxTxn]).range([0,r])
+        maxTxn = d3.extent(d, d=> d.TxnFee).reverse()
+        txMin = d3.min(d, d=> d.TxnFee)
+        txMean = d3.median(d, d=> d.TxnFee)
+        txMax = d3.max(d, d=> d.TxnFee)
+        colorScale = d3.scaleQuantize().domain([txMin, txMean, txMax]).range( colorbrewer.RdBu[4] )
+        yScale = d3.scaleLog().domain(maxTxn).range([0,r])
 
         setMainNode([
           ...d.map( (edge,i) =>  nodeHash[edge.id] = {id: edge.id,  dTime: edge.DateTime,  tfee: edge.TxnFee, transaction_fee: edge.TxnFee, radius: yScale(edge.TxnFee), color: colorScale(edge.TxnFee)})
@@ -68,9 +74,9 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
       case "Set Active":           
         const f = comingData.filter( d => d.Method === "Set Active")
 
-        maxTxn = d3.max(f, d=> d.TxnFee)
-        colorScale = d3.scaleQuantize().domain([0,maxTxn]).range(colorbrewer.Reds[3])
-        yScale = d3.scaleLinear().domain([0, maxTxn]).range([0,r])
+        maxTxn = d3.extent(f, d=> d.TxnFee)
+        colorScale = d3.scaleQuantize().domain(maxTxn).range(colorbrewer.Reds[3])
+        yScale = d3.scaleLinear().domain(maxTxn).range([0,r])
 
         setMainNode([
           ...f.map( (edge,i) =>  nodeHash[edge.id] = {id: edge.id, dTime: edge.DateTime,  tfee: edge.TxnFee, transaction_fee: edge.TxnFee, radius: yScale(edge.TxnFee), color: colorScale(edge.TxnFee)})
@@ -87,7 +93,7 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
     svgEl.selectAll("*").remove(); // Clear svg content before adding new elements 
     const svg = svgEl
       .append("g").attr('transform', `translate(0,-110)`)
-    const xScale =d3.scaleBand().domain(["Owner Mint","Set Provenance Hash","Set Approval For All","Mint Listed","Set Active" ]).range([0,dimensionsW-150])
+    // const xScale =d3.scaleBand().domain(["Owner Mint","Set Provenance Hash","Set Approval For All","Mint Listed","Set Active" ]).range([0,dimensionsW-150])
 
     // Define the div for the tooltip
     let div = d3.select('.tooltip-area').style('opacity', 0);

@@ -19,7 +19,7 @@ function GeoChart({colorPicker, datos}){
     //   newGeoFx(d)
     // }).catch( (e) => console.log(e) )
 		Promise.all([
-			d3.json('http://localhost:3000/colombia.geo.json'),
+			d3.json('http://fretzcastano/colombia.geo.json'),
 			d3.csv(datos)
 			])
 			.then( (d) =>{

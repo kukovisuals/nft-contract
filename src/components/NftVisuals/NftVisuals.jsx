@@ -14,7 +14,7 @@ function NftVisuals() {
   const [width, height] = useWindowSize()
 
   useEffect(() => {
-    d3.csv('http://fretzcastano/invisibleFriends.csv').then( (data,error) =>{
+    d3.csv('http://fretzcastano.com/invisibleFriends.csv').then( (data,error) =>{
 
       const nodes = data.map( (d,i) => {
         const node = {}

@@ -8,7 +8,7 @@ import './StockMarketApp.scss';
 function StockChart({symbol}){
   return (
     <Fetch
-      uri={`http://fretzcastano/stable/stock/twtr/chrt/5dm/${symbol}.json`}
+      uri={`http://fretzcastano.com/stable/stock/twtr/chrt/5dm/${symbol}.json`}
       renderSuccess={StockDetails}
     />
 

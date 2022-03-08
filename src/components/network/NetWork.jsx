@@ -16,7 +16,7 @@ function NetWork() {
   const height = 1200
 
   useEffect(() => {
-    d3.csv('invisibleFriends.csv').then( (data,error) =>{
+    d3.csv('http://fretzcastano.com/invisibleFriends.csv').then( (data,error) =>{
       // console.log(data)
       const hash = data.map( (d,i) => {
 

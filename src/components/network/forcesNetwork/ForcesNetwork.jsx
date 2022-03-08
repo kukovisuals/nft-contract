@@ -1,9 +1,10 @@
 import React,{useState, useRef, useEffect} from 'react';
 import colorbrewer from 'colorbrewer'
 import * as d3 from 'd3';
+import MenuButton from '../../MenuButton/MenuButton';
 import './ForcesNetwork.css'
 
-function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
+function ForcesNetwork({dimensionsW = 500, dimensionsH = 500,  comingData =[]}) {
   const currentRef = useRef()
   const [mainNode, setMainNode] = useState([])
 
@@ -146,9 +147,14 @@ function ForcesNetwork({dimensionsW, dimensionsH,  comingData =[]}) {
       // console.log(w )
      return () => {}
   },[mainNode])  
-
+  const titleNft = {
+    position: 'absolute', 
+    'paddingLeft': '10px'
+  }
   return (
     <div id="drawingSvg">
+      <MenuButton/> 
+      <h3 style={titleNft}>Invisible Friends NFT</h3>
       <div className="button-rev">
         <button className="buttton-one" onClick={handleChange}> Set Provenance Hash </button>
         <button className="buttton-one" onClick={handleChange}> Set Approval For All </button>

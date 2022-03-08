@@ -14,3 +14,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.App{
+  margin: 0 auto;
+  width: 80%;
+}
+
+.contact-container{
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 8%;
+}
+
+.contact-containe-a {
+    text-decoration: none;
+    color: white;
+}

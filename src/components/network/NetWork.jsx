@@ -1,5 +1,6 @@
 import React,{useState, useRef, useEffect} from 'react';
 import * as d3 from 'd3';
+import MenuButton from '../components/MenuButton/MenuButton';
 import './NetWork.css'
 // Blockno: "14264937"
 // CurrentValue @ $2537.36/Eth: "634.34"
@@ -113,6 +114,7 @@ function NetWork() {
 
   return (
     <div id="drawing">
+      <MenuButton/>
        <svg ref={currentRef} width={width} height={height} />
     </div>
   );

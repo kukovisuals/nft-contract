@@ -1,0 +1,51 @@
+.stockMarket-chart{
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 1%;
+}
+
+.drawCircles{
+  transform:  translate(26.7857px, 0px);
+}
+
+.submitSymbol{
+  position: absolute;
+    display: flex;
+    right: 15%;
+    top: 11%;
+}
+
+.stock-fecha{
+  position: absolute;
+  width: 14%;
+  text-align: center;
+  top: 13%;
+  left: 38%;
+}
+
+.stock-fecha p {
+    width: 50%;
+    margin: 0 auto;
+}
+.button-date-container{
+  width: 100%;
+}
+
+.stock-button {
+  background-color: white;
+  border: none;
+  border-radius: 4%;
+  width: 100px;
+  height: 40px;
+  margin: 0 3px 3px 3px;
+  cursor: pointer;
+}
+
+.stock-title{
+  width: 79px;
+}
+
+.stock-input{
+      width: 100px;
+    height: 35px;
+}

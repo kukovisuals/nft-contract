@@ -9,11 +9,16 @@
     "@types/colorbrewer": "^1.0.29",
     "colorbrewer": "^1.5.2",
     "d3": "^7.3.0",
+    "d3-svg-legend": "^2.25.6",
     "node-iex-cloud": "^2.1.1",
     "react": "^17.0.2",
     "react-csv-reader": "^3.4.0",
     "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.2",
     "react-scripts": "^5.0.0",
+    "react-scroll-parallax": "^3.0.4",
+    "sass": "^1.49.9",
+    "styled-components": "^5.3.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

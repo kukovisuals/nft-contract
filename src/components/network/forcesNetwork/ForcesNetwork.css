@@ -30,6 +30,12 @@
     border-radius: 0%;
     /* border: 1px solid; */
     cursor: pointer;
+
+    &:hover{
+      background-color:rgb(8, 48, 107);
+      color:  white;
+    }
+
   }
 
   .buttton-one{
@@ -48,11 +54,7 @@
     cursor: pointer;  
   }
 
-  button:hover{
-    background-color:rgb(8, 48, 107);
-    color:  white;
-  }
-
+  
   .button-rev{
     width: 100%;
     display: flex;
@@ -107,6 +109,7 @@
       color: black;
   }
 @media only screen and (min-width:  768px){
+
   .buttonClass{
     width: 50%;
     display: flex;
@@ -118,12 +121,14 @@
   .buttton-mint  {
    height: 50px;
    margin: 1px;
+    
+    & button:hover{
+      background-color:rgb(8, 48, 107);
+      color:  white;
+    }
   }
 
-  button:hover{
-    background-color:rgb(8, 48, 107);
-    color:  white;
-  }
+  
   .buttton-one {
     margin: 1px;
     height: 50px;

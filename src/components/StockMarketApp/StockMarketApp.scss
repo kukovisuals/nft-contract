@@ -1,26 +1,36 @@
+$light_blue: rgb(94, 227, 230);
+$divisor_color: #191c20;
+$mainColor: #282c34;
+
 .stockMarket-chart{
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
-  padding-top: 1%;
+  // padding-top: 4%;
 }
 
 .drawCircles{
   transform:  translate(26.7857px, 0px);
 }
 
-.submitSymbol{
-  position: absolute;
-    display: flex;
-    right: 15%;
-    top: 11%;
+// controllers main container 
+.controllers{
+  float: left;
+  height: 100vh;
+  width: 25%;
+  background-color: $divisor_color;
+  // border: 1px solid white;
 }
-
+.divisor{
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 10%;
+}
 .stock-fecha{
   position: absolute;
   width: 14%;
   text-align: center;
-  top: 13%;
-  left: 38%;
+  top: 10%; 
+  left: 58%;
 }
 
 .stock-fecha p {
@@ -28,24 +38,58 @@
     margin: 0 auto;
 }
 .button-date-container{
-  width: 100%;
+  width: 70%;
+  float: left;;
+  padding-left: 8%;
+  padding-top: 4%;  
 }
 
-.stock-button {
-  background-color: white;
-  border: none;
-  border-radius: 4%;
-  width: 100px;
-  height: 40px;
-  margin: 0 3px 3px 3px;
-  cursor: pointer;
-}
 
 .stock-title{
   width: 79px;
 }
+// form container 
+.submitSymbol{
 
+}
+// from input
 .stock-input{
-      width: 100px;
-    height: 35px;
+  width: 100%;
+  height: 35px;
+  background-color: $mainColor;
+  border-color: $light_blue;
+  color: $light_blue;
+  padding-left: 5%;
+}
+
+#xAxisG{
+  color: $mainColor;
+}
+#yAxisG{
+  color: $mainColor;
+}
+#xAxisG .tick{
+  color: white;
+}
+#yAxisG .tick{
+  color: white;
+}
+
+
+// button container next prev 
+.nextRight{
+  height: 6vh;
+  // border: 1px solid;
+}
+
+//stock button !!!
+.stock-button {
+  background-color: $divisor_color;
+  color: white;
+  border: none;
+  border-radius: 4%;
+  width: 100px;
+  height: 60%;
+  margin: 0.5%;
+  cursor: pointer;
 }

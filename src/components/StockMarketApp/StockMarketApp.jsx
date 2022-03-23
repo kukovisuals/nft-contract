@@ -33,6 +33,8 @@ function StockMarketApp() {
                 type="text"
                 value={sendSymbol}
                 onChange={handleChange}
+                minLength="4"
+                maxLength="4"
                 placeholder="Symbol"
               /> 
             <input className="stock-button" type="hidden" value="enter"/>

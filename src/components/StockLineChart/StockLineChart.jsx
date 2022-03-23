@@ -23,7 +23,7 @@ function StockLineChart({dataset =[], renderItem, renderEmpty }){
     const highPrice = d3.max(data, d => d.high)
   
     let blue = "#5EE3E6",  orange = "#FF00CB", backgroundColor = "#282c34"
-    const xScale = d3.scaleBand().domain(timeDomain).range([ 0, w ]);
+    const xScale = d3.scaleBand().domain(timeDomain).range([ 0, w ]).padding([1]);
     const yScale = d3.scaleLinear().domain([lowPrice -.2, highPrice + .2]).range([ h, 0 ])
     
     const xAxis = d3.axisBottom(xScale).tickSize(h).tickValues(timeDomain.filter((d,i)=> i%3===0 )) 

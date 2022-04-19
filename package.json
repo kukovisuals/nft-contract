@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/colorbrewer": "^1.0.29",
     "colorbrewer": "^1.5.2",
-    "d3": "^7.3.0",
+    "d3": "^7.4.0",
     "d3-svg-legend": "^2.25.6",
     "node-iex-cloud": "^2.1.1",
     "react": "^17.0.2",
